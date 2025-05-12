@@ -5,57 +5,127 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { Operation } from "./utils/calc-store";
+export { Operation } from "./utils/calc-store";
 export namespace Components {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+    interface AppRoot {
+    }
+    interface CalcButton {
+        "label": string;
+        "wide": boolean;
+    }
+    interface CalcDisplay {
+        "value": string;
+    }
+    interface CalcKeypad {
+    }
+    interface CalcLog {
+        "logs": Operation[];
     }
 }
+export interface CalcButtonCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCalcButtonElement;
+}
+export interface CalcKeypadCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCalcKeypadElement;
+}
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLAppRootElement: {
+        prototype: HTMLAppRootElement;
+        new (): HTMLAppRootElement;
+    };
+    interface HTMLCalcButtonElementEventMap {
+        "buttonClick": string;
+    }
+    interface HTMLCalcButtonElement extends Components.CalcButton, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLCalcButtonElementEventMap>(type: K, listener: (this: HTMLCalcButtonElement, ev: CalcButtonCustomEvent<HTMLCalcButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLCalcButtonElementEventMap>(type: K, listener: (this: HTMLCalcButtonElement, ev: CalcButtonCustomEvent<HTMLCalcButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLCalcButtonElement: {
+        prototype: HTMLCalcButtonElement;
+        new (): HTMLCalcButtonElement;
+    };
+    interface HTMLCalcDisplayElement extends Components.CalcDisplay, HTMLStencilElement {
+    }
+    var HTMLCalcDisplayElement: {
+        prototype: HTMLCalcDisplayElement;
+        new (): HTMLCalcDisplayElement;
+    };
+    interface HTMLCalcKeypadElementEventMap {
+        "buttonPressed": string;
+    }
+    interface HTMLCalcKeypadElement extends Components.CalcKeypad, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLCalcKeypadElementEventMap>(type: K, listener: (this: HTMLCalcKeypadElement, ev: CalcKeypadCustomEvent<HTMLCalcKeypadElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLCalcKeypadElementEventMap>(type: K, listener: (this: HTMLCalcKeypadElement, ev: CalcKeypadCustomEvent<HTMLCalcKeypadElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLCalcKeypadElement: {
+        prototype: HTMLCalcKeypadElement;
+        new (): HTMLCalcKeypadElement;
+    };
+    interface HTMLCalcLogElement extends Components.CalcLog, HTMLStencilElement {
+    }
+    var HTMLCalcLogElement: {
+        prototype: HTMLCalcLogElement;
+        new (): HTMLCalcLogElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "app-root": HTMLAppRootElement;
+        "calc-button": HTMLCalcButtonElement;
+        "calc-display": HTMLCalcDisplayElement;
+        "calc-keypad": HTMLCalcKeypadElement;
+        "calc-log": HTMLCalcLogElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+    interface AppRoot {
+    }
+    interface CalcButton {
+        "label"?: string;
+        "onButtonClick"?: (event: CalcButtonCustomEvent<string>) => void;
+        "wide"?: boolean;
+    }
+    interface CalcDisplay {
+        "value"?: string;
+    }
+    interface CalcKeypad {
+        "onButtonPressed"?: (event: CalcKeypadCustomEvent<string>) => void;
+    }
+    interface CalcLog {
+        "logs"?: Operation[];
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "app-root": AppRoot;
+        "calc-button": CalcButton;
+        "calc-display": CalcDisplay;
+        "calc-keypad": CalcKeypad;
+        "calc-log": CalcLog;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+            "calc-button": LocalJSX.CalcButton & JSXBase.HTMLAttributes<HTMLCalcButtonElement>;
+            "calc-display": LocalJSX.CalcDisplay & JSXBase.HTMLAttributes<HTMLCalcDisplayElement>;
+            "calc-keypad": LocalJSX.CalcKeypad & JSXBase.HTMLAttributes<HTMLCalcKeypadElement>;
+            "calc-log": LocalJSX.CalcLog & JSXBase.HTMLAttributes<HTMLCalcLogElement>;
         }
     }
 }
