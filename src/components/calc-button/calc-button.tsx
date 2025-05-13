@@ -11,7 +11,7 @@ export class CalcButton {
 
   @Event() buttonClick: EventEmitter<string>;
 
-  handleClick() {
+  private handleClick() {
     this.buttonClick.emit(this.label);
   }
 

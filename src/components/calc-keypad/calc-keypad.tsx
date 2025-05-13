@@ -16,7 +16,7 @@ export class CalcKeypad {
     ['0', '.', '='],
   ];
 
-  handleButtonClick(label: string) {
+  private handleButtonClick(label: string) {
     this.buttonPressed.emit(label);
   }
 
